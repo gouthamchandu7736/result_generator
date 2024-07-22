@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask App</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container for the form */
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Styling for the heading */
+        h1 {
+            color: #4A90E2;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Label and input field styling */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        /* Submit button styling */
+        input[type="submit"] {
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <label for="num_classes">Number of Classes:</label>
+        <input type="number" id="num_classes" name="num_classes" min="1" required><br>
+
+        <div id="class_details"></div>
+
+        <label for="accuracy">Accuracy Needed:</label>
+        <input type="number" step="0.01" id="accuracy" name="accuracy" required><br>
+        
+        <label for="epochs">Epoch Count:</label>
+        <input type="number" id="epochs" name="epochs" required><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById('num_classes').addEventListener('input', function() {
+            var numClasses = this.value;
+            var classDetailsDiv = document.getElementById('class_details');
+            classDetailsDiv.innerHTML = '';
+            for (var i = 0; i < numClasses; i++) {
+                var labelName = document.createElement('label');
+                labelName.setAttribute('for', 'class_' + i + '_name');
+                labelName.innerHTML = 'Class ' + (i+1) + ' Name:';
+                classDetailsDiv.appendChild(labelName);
+
+                var inputName = document.createElement('input');
+                inputName.setAttribute('type', 'text');
+                inputName.setAttribute('id', 'class_' + i + '_name');
+                inputName.setAttribute('name', 'class_' + i + '_name');
+                inputName.required = true;
+                classDetailsDiv.appendChild(inputName);
+
+                var labelImages = document.createElement('label');
+                labelImages.setAttribute('for', 'class_' + i + '_images');
+                labelImages.innerHTML = 'Number of Images in Class ' + (i+1) + ':';
+                classDetailsDiv.appendChild(labelImages);
+
+                var inputImages = document.createElement('input');
+                inputImages.setAttribute('type', 'number');
+                inputImages.setAttribute('id', 'class_' + i + '_images');
+                inputImages.setAttribute('name', 'class_' + i + '_images');
+                inputImages.setAttribute('min', '1');
+                inputImages.required = true;
+                classDetailsDiv.appendChild(inputImages);
+
+                classDetailsDiv.appendChild(document.createElement('br'));
+            }
+        });
+    </script>
+</body>
+</html>

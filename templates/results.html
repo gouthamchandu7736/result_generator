@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Metrics Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 2rem;
+            color: #343a40;
+        }
+        .metrics {
+            margin-bottom: 2rem;
+        }
+        .metrics h4 {
+            font-weight: bold;
+        }
+        .plot {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .plot img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Model Evaluation Results</h2>
+        <div class="metrics">
+            <h4>Performance Metrics:</h4>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Accuracy:</strong> {{ accuracy | round(2) }}</li>
+                <li class="list-group-item"><strong>Precision:</strong> {{ precision | round(2) }}</li>
+                <li class="list-group-item"><strong>Recall:</strong> {{ recall | round(2) }}</li>
+                <li class="list-group-item"><strong>F1 Score:</strong> {{ f1 | round(2) }}</li>
+            </ul>
+        </div>
+        <div class="plot">
+            <h4>Confusion Matrix</h4>
+            <img src="{{ cm_path }}" alt="Confusion Matrix">
+        </div>
+        <div class="plot">
+            <h4>ROC Curves for All Classes</h4>
+            <img src="{{ combined_roc_path }}" alt="Combined ROC Curve">
+        </div>
+        <div class="plot">
+            <h4>PR Curves for All Classes</h4>
+            <img src="{{ combined_pr_path }}" alt="Combined PR Curve">
+        </div>
+        <div
